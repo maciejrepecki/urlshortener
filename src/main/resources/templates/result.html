@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SKRACACZ</title>
+</head>
+<body>
+<div>Twój nowy link:
+    <a th:href="${linkDto.shortLink}"><span th:text="${linkDto.shortLink}"></span></a>
+</div>
+<div>Twój stary link:
+    <a th:href="${linkDto.longLink}"><span th:text="${linkDto.longLink}"></span></a>
+</div>
+<a th:text="'Unikalne hasło do usunięcia linku: ' + ${linkDto.password}"></a>
+<br>
+<p>Powrót na stronę główną: <a href="/">link</a>.</p>
+</body>
+</html>

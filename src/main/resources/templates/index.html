@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SKRACACZ</title>
+
+</head>
+<body>
+<h1>Skróć link</h1>
+<form action="#" method="post" th:action="@{/save}" th:object="${attribute}">
+    <label>
+        Link do skrócenia:
+        <input type="text" name="longLink" placeholder="http://www.dupa.pl" th:field="*{longLink}">
+    </label>
+    <p th:errors="*{longLink}" class="error">Błędy związane z linkiem.</p>
+    <button type="submit">Dodaj</button>
+</form>
+<p>Jeśli chcesz skasować link z bazy, kliknij <a href="delete">tutaj</a>.</p>
+<p>Jeśli chcesz wyświetlić detale posiadanego linku, kliknij <a href="details">tutaj</a>.</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły linku</title>
+</head>
+<body>
+<form action="#" method="post" th:action="@{/details}" th:object="${attribute}">
+    <label>
+        Link do sprawdzenia szczegółów:
+        <input type="text" name="shortLink" placeholder="http://localhost:8080/..." th:field="*{shortLink}">
+    </label>
+    <p th:errors="*{shortLink}" class="error">Błędy związane z linkiem.</p>
+    <button type="submit">Sprawdź</button>
+</form>
+
+<div th:switch="${isPresent}">
+    <div th:case="true">
+        <br>
+        <div>Twój stary link:
+            <a th:href="${linkDto.longLink}"><span th:text="${linkDto.longLink}"></span></a>
+        </div>
+        <p th:text="'Ilość wejść: ' + ${linkDto.enters}"></p>
+    </div>
+    <p th:case="false">Nie ma takiego linku!</p>
+    <p th:case="*"></p>
+</div>
+<p>Powrót na stronę główną: <a href="/">link</a>.</p>
+</body>
+</html>

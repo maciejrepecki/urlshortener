@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuwanie linku</title>
+</head>
+<body>
+<form method="post" action="/delete">
+    <label>
+        Hasło usunięcia:
+        <input name="password" type="text">
+    </label>
+    <button type="submit">Usuń</button>
+</form>
+<div th:switch="${isDeleted}">
+    <p th:case="true">Twój link został usunięty.</p>
+    <p th:case="false">Błędne hasło, link nie został usunięty.</p>
+    <p th:case="*"></p>
+</div>
+<p>Powrót na stronę główną: <a href="/">link</a>.</p>
+</body>
+</html>
