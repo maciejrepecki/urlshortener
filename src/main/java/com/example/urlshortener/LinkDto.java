@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-
 public class LinkDto {
 
     @NotNull
@@ -17,7 +16,6 @@ public class LinkDto {
     private long enters;
 
     public LinkDto(String longLink, String shortLink, String password, long enters) {
-
         this.longLink = longLink;
         this.shortLink = shortLink;
         this.password = password;

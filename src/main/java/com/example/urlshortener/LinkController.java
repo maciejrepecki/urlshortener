@@ -28,11 +28,12 @@ public class LinkController {
     @GetMapping("/{shortLink}")
     String getLongLink(@PathVariable String shortLink, Model model) {
         String httpComponent = "http://localhost:8080/";
-        Optional<LinkDto> linkDto = linkService.shortToLong(httpComponent + shortLink);
-        if (linkDto.isPresent()) {
-            linkService.addEnter(linkDto.get());
-            model.addAttribute(linkDto.get().getLongLink());
-        }
+        var linkDto = linkService.shortToLong(httpComponent + shortLink);
+        linkDto.ifPresent(i -> {
+                    linkService.addEnter(linkDto.get());
+                    model.addAttribute(linkDto.get().getLongLink());
+                }
+        );
         return linkDto.isPresent() ? "redirect" : "notfound";
     }
 
@@ -55,7 +56,7 @@ public class LinkController {
 
     @PostMapping("/delete")
     String deleteForm(String password, Model model) {
-        boolean isDeleted = linkService.delete(password);
+        var isDeleted = linkService.delete(password);
         model.addAttribute("isDeleted", isDeleted);
         return "delete";
     }
@@ -71,14 +72,11 @@ public class LinkController {
 
         Optional<LinkDto> resultLinkDto = linkService.details(linkDto.getShortLink());
 
-        if (resultLinkDto.isPresent()) {
-            boolean isPresent = true;
-            model.addAttribute("isPresent", isPresent);
-            model.addAttribute(resultLinkDto.get());
-        } else {
-            boolean isPresent = false;
-            model.addAttribute("isPresent", isPresent);
-        }
+        resultLinkDto.ifPresentOrElse(resultLink -> {
+            model.addAttribute("isPresent", true);
+            model.addAttribute(resultLink);
+        }, () -> model.addAttribute("isPresent", false));
+
         return "details";
     }
 }

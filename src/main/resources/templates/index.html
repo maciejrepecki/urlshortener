@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Shortener</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/main.css" rel="stylesheet">
 </head>
 <body>
-<h1>Skróć link</h1>
-<form action="#" method="post" th:action="@{/save}" th:object="${attribute}">
-    <label>
-        Link do skrócenia:
-        <input type="text" name="longLink" placeholder="http://www.dupa.pl" th:field="*{longLink}">
-    </label>
-    <p th:errors="*{longLink}" class="error">Błędy związane z linkiem.</p>
-    <button type="submit">Dodaj</button>
-</form>
-<p>Jeśli chcesz skasować link z bazy, kliknij <a href="delete">tutaj</a>.</p>
-<p>Jeśli chcesz wyświetlić detale posiadanego linku, kliknij <a href="details">tutaj</a>.</p>
+<div class="container" align="center">
+    <br>
+    <img src="/static/logo.jpg">
+    <form action="#" method="post" th:action="@{/save}" th:object="${attribute}">
+        <label>
+
+            <label for="basic-url"></label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Twój link:</span>
+                </div>
+                <input type="text" name="longLink" class="form-control"
+                       placeholder="http://www.google.pl" th:field="*{longLink}"
+                       id="basic-url" aria-describedby="basic-addon3">
+            </div>
+        </label>
+        <button type="submit" class="btn btn-outline-dark">Skróć link!</button>
+        <div th:errors="*{longLink}" class="error">
+            <div class="alert alert-danger" role="alert">
+                Błędy związane z linkiem.
+            </div>
+        </div>
+    </form>
+    <p>Jeśli chcesz usunąć link z bazy, kliknij <a href="delete">tutaj</a>.</p>
+    <p>Jeśli chcesz wyświetlić detale posiadanego linku, kliknij <a href="details">tutaj</a>.</p>
+</div>
 </body>
 </html>
