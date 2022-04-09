@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class LinkController {
-    private final LinkService linkService;
 
+    private final LinkService linkService;
     public LinkController(LinkService linkService) {
         this.linkService = linkService;
     }
@@ -29,12 +28,11 @@ public class LinkController {
     String getLongLink(@PathVariable String shortLink, Model model) {
         String httpComponent = "http://localhost:8080/";
         var linkDto = linkService.shortToLong(httpComponent + shortLink);
-        linkDto.ifPresent(i -> {
-                    linkService.addEnter(linkDto.get());
-                    model.addAttribute(linkDto.get().getLongLink());
-                }
-        );
-        return linkDto.isPresent() ? "redirect" : "notfound";
+        return linkDto.map(presentLink -> {
+            linkService.addEnter(presentLink);
+            model.addAttribute(presentLink.getLongLink());
+            return "redirect";
+        }).orElse("notfound");
     }
 
     @PostMapping("/save")
@@ -46,7 +44,6 @@ public class LinkController {
             model.addAttribute(linkDto);
             return "result";
         }
-
     }
 
     @GetMapping("/delete")
@@ -69,14 +66,11 @@ public class LinkController {
 
     @PostMapping("/details")
     String detailsForm(@Valid @ModelAttribute("attribute") LinkDto linkDto, BindingResult bindingResult, Model model) {
-
-        Optional<LinkDto> resultLinkDto = linkService.details(linkDto.getShortLink());
-
+        var resultLinkDto = linkService.details(linkDto.getShortLink());
         resultLinkDto.ifPresentOrElse(resultLink -> {
             model.addAttribute("isPresent", true);
             model.addAttribute(resultLink);
         }, () -> model.addAttribute("isPresent", false));
-
         return "details";
     }
 }
