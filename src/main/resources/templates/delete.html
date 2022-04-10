@@ -2,23 +2,32 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Usuwanie linku</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 </head>
 <body>
-<form method="post" action="/delete">
-    <label>
-        Hasło usunięcia:
-        <input name="password" type="text">
-    </label>
-    <button type="submit">Usuń</button>
-</form>
-<div th:switch="${isDeleted}">
-    <p th:case="true">Twój link został usunięty.</p>
-    <p th:case="false">Błędne hasło, link nie został usunięty.</p>
-    <p th:case="*"></p>
+<div class="container" align="center">
+    <br>
+    <img src="../static/img/logo.jpg" th:src="@{img/logo.jpg}" alt="logo"/>
+    <form method="post" action="/delete">
+        <label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">Hasło:</span>
+                </div>
+                <input name="password" class="form-control" type="text" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+        </label>
+        <button type="submit" class="btn btn-outline-dark">Usuń!</button>
+    </form>
+
+    <div th:switch="${isDeleted}">
+        <p th:case="true" class="alert alert-success" role="alert">Twój link został usunięty.</p>
+        <p th:case="false" class="alert alert-warning" role="alert">Błędne hasło, link nie został usunięty.</p>
+    </div>
+
+    <span>Powrót na stronę główną: <a href="/">link</a>.</span>
 </div>
-<p>Powrót na stronę główną: <a href="/">link</a>.</p>
 </body>
 </html>

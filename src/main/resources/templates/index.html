@@ -5,16 +5,14 @@
     <title>URL Shortener</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-    <link href="../static/main.css" rel="stylesheet">
 </head>
 <body>
 <div class="container" align="center">
     <br>
-    <img src="/static/logo.jpg">
+    <img src="../static/img/logo.jpg" th:src="@{img/logo.jpg}" alt="logo">
+
     <form action="#" method="post" th:action="@{/save}" th:object="${attribute}">
         <label>
-
-            <label for="basic-url"></label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">Twój link:</span>
@@ -25,11 +23,7 @@
             </div>
         </label>
         <button type="submit" class="btn btn-outline-dark">Skróć link!</button>
-        <div th:errors="*{longLink}" class="error">
-            <div class="alert alert-danger" role="alert">
-                Błędy związane z linkiem.
-            </div>
-        </div>
+        <div th:errors="*{longLink}" class="alert alert-warning" role="alert">Błędy związane z linkiem.</div>
     </form>
     <p>Jeśli chcesz usunąć link z bazy, kliknij <a href="delete">tutaj</a>.</p>
     <p>Jeśli chcesz wyświetlić detale posiadanego linku, kliknij <a href="details">tutaj</a>.</p>

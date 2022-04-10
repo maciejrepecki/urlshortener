@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Shortener</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 </head>
 <body>
-<div>Twój skrócony link:
-    <a th:href="${linkDto.shortLink}"><span th:text="${linkDto.shortLink}"></span></a>
+<div class="container" align="center">
+    <br>
+    <img src="../static/img/logo.jpg" th:src="@{img/logo.jpg}" alt="logo"/>
+    <div class="alert alert-success" role="alert">
+        Sukces, twój link został skrócony!
+    </div>
+    <div>Twój nowy, krótki link: <a th:href="${linkDto.shortLink}"><span th:text="${linkDto.shortLink}">www.a.pl</span></a>
+    </div>
+    <div>Twój pełny link: <a th:href="${linkDto.longLink}"><span th:text="${linkDto.longLink}">www.aaaaaa.pl</span></a>
+    </div>
+    <div>Unikalne hasło do usunięcia linku: <span th:text="${linkDto.password}">1234</span></div>
+    <br>
+    <p>Powrót na stronę główną: <a href="/">link</a>.</p>
 </div>
-<div>Twój skracany link:
-    <a th:href="${linkDto.longLink}"><span th:text="${linkDto.longLink}"></span></a>
-</div>
-<a th:text="'Unikalne hasło do usunięcia linku: ' + ${linkDto.password}"></a>
-<br>
-<p>Powrót na stronę główną: <a href="/">link</a>.</p>
 </body>
 </html>
